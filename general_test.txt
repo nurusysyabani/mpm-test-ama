@@ -1,0 +1,94 @@
+
+1. Apakah anda familiar dengan JWT (Jason Web Token)? Jelaskan!
+Token yang berisi data yang dapat diverifikasi oleh dua pihak atau lebih dalam
+format JSON. JWT dibagi menjadi: header (berisi tentang algoritma dan jenis token
+yang  digunakan), payload (berisi data yang yang akan dikirim melalui token,
+biasanya data yang menunjang identitas user seperti id, email, username, role, dll
+tanpa data confidential seperti password), signature (gabungan dari header,
+payload, dan sebuah secret key yang dihash sesuai ketentuan header, fungsi
+signature untuk memverifikasi header ataupun payload yang ada di dalam token tidak
+berubah nilai aslinya). Ketika user login di sebuah aplikasi A dan terotentikasi,
+selain dapat mengakses aplikasi A, data session user tersebut juga dapat digunakan
+untuk mengakses aplikasi B. Aplikasi B harus memiliki  secret key yang sama dengan
+aplikasi A serta akses ke database user aplikasi A atau memiliki database user yang
+tersinkronisasi dengan aplikasi A.
+
+2. Pertimbangan-pertimbangan apa yang Anda ambil dari sisi UI, Keamanan, Kinerja,
+SEO, Maintainability maupun Teknologi saat Anda membangun aplikasi web atau situs?
+Tujuan utama aplikasi; misalnya aplikasi untuk absensi karyawan atau untuk
+purchasing order berbeda pengembangannya dan target user; siapa client aplikasi
+yang akan dibuat, internal perusahaan, rekan bisnis, atau publik kah. Setelah
+tujuan utama dan target user dipastikan baru bisa dipastikan teknologi yang akan
+digunakan apakah akan menggunakan teknologi yang medukung kinerja aplikasi untuk
+jumlah user yang sedikit, akan berkembang, atau banyak sejak awal. Untuk aplikasi
+yang dipakai internal keamanan biasanya lebih diperketat, misalnya set up
+konfigurasi untuk transaksi perusahaan, dll. Bisa menggunakan vpn sebagai ip yang
+di whitelist. Jika aplikasi untuk publik harus ada riset tentang hal yang sedang
+berkembang dan trending di publik untuk mengoptimalkan SEO. Dari sisi UI, aplikasi
+tidak boleh berantakan untuk target user apa pun. UI boleh terlihat sangat
+sederhana tapi harus jelas flow dan fungsi setiap bagiannya. Jika aplikasi
+ditujukan untuk user yang bertmbah banyak dengan seiring waktu perlu dipikirkan
+untuk menggunakan teknologi yang memiliki kinerja tinggi sejak awal agar proses
+migrasi teknologi bisa dihindari.
+
+3. Apakah anda terbiasa menggunakan sprint development methodology ? Jika sudah
+tools apa yang anda gunakan dan bagaimana cara kerja anda agar on time delivery
+serta performance 100% tiket selesai?
+Ya, pernah menggunakan tools pivotaltracker. Cara kerja yang saya dan tim lakukan:
+- Produk baru, maintenance, atau pengembangan fitur yang diinginkan client masuk ke
+daftar backlog product owner
+- Ketika sprint dimulai, product owner dan perwakilan client (jika dibutuhkan) akan
+menjelaskan apa yang mereka butuhkan dan inginkan di aplikasi
+- Setelah tim tech menerima penjelasan dan sudah mengonfirmasi semua
+ketidakjelasan, tim tech akan menentukan backlog yang akan diambil untuk sprint ini
+dan dikonfirmasi kembali ke product owner
+- Tim tech akan mendeskripsikan backlog menjadi task-task yang lebih detail dan
+pihak dev maupun QE mulai meng-assign task
+- Setelah semua task sudah ter-assign, dev mengonfirmasi ke QE urutan task yang
+akan dikerjakan dan waktu penyerahan untuk ditest oleh QE
+- Dev tidak boleh menyerahkan semua task sekaligus di waktu menjelang akhir sprint
+karena akan memperbanyak load QE di akhir sedangkan di awal kosong
+- Setelah mendapatkan task biasanya saya langsung break down ke task yang lebih
+sederhana lagi di tools project managementnya, dan saya kerjakan mengikuti panduan
+break down task yang sudah saya buat sebelumnya
+- Task yang telah selesai akan ditest oleh QE, jika ada revisi maka akan direject
+dengan catatan
+- Jika tidak ada revisi, task akan diaccept
+- Setelah semua task accepted, rilis akan dilakukan sesuai pembagian jadwal dev,
+lalu increment produk di production akan dicek oleh dev dan client
+
+4. Kesulitan-kesulitan apa saja yang pernah anda hadapi pada saat membuat API dan
+bagaimana cara anda mengatasinya?
+- Ketika model database dan relasinya belum pasti karena di tahap awal inisisasi
+pembuatan aplikasi atau proyek, dev masih try and error dengan sistem yang sedang
+dibuat. Cara mengatasinya adalah dengan membuat design database yang telah
+dipikirkan dengan baik agar tidak terjadi perubahan mayor di masa depan.
+- Memastikan keamanan resources; mencari tau lebih detail best practices dalam
+memastikan data dan aplikasi yang kita buat akan aman dari kebocoran data.
+Konsultasi ke pihak yang lebih ahli seperti system engineer, project manager,
+maupun devops.
+
+5. Apakah anda pernah menggunakan Python sebelumnya? Jika iya apakah anda familiar
+dengan Context Manager? Jelaskan!
+Pernah menggunakan Python. Context manager digunakan untuk memanage resources
+seperti file ata konektor ke database. Setelah menggunakan resource sangat penting
+untuk memastikan resource tersebut release dari penggunaan. Jika tidak terelease
+dengan benar bisa menyebabkan kebocoran resource, ataupun sistem crash. Cara paling
+umum dalam memanage resource biasanya menggunakan keyword with.
+- with: jika ingin dua operasi berkesinambungan dijalankan secara berpasangan tapi
+ingin tetap punya custom code block; dua operasi tersebut akan berjalan tanpa
+memperhatikan bagaimana custom code block berjalan
+
+6. Apakah anda pernah menggunakan Docker? Jika pernah jelaskan cara anda membuat
+container!
+- Cek status apakah Docker sudah terinstall dan daemon sudah start
+- Akses dan download (pull) image yang ada di lokal komputer atau Docker Hub
+- Cek image/s yang telah terdownload di di lokal komputer, outputnya berupa nama
+repository, tag, image ID, created time, dan size
+- Jalankan image yang akan dibuat menjadi container
+- Akses shell dari container yang telah dibuat. Kita bisa install, update, atau
+hanya mengecek versi, dll. Keluar dari shell jika sudah tidak dibutuhkan.
+- Cek apakah container yang kita buat tadi aktif atau tidak, akan ditampilkan data
+berupa container ID, image, command, created time, dan status
+- Start container yang ingin diaktifkan dengan menggunakan container ID, lalu cek
+kembali apakah sudah aktif
